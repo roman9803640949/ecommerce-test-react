@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Nav from "./components/Nav";
+import SignUp from "./components/SignUp";
+import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/Footer";
+import { lazy } from "react";
+// const Footer = lazy(() => import("./components/Footer"));
 function App() {
+  console.log("app");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path="/" element={PrivateRoute(<Footer />)} />
+          <Route path="/add" element={PrivateRoute(<Footer />)} />
+          <Route path="/update" element={PrivateRoute(<Footer />)} />
+          <Route path="/logout" element={PrivateRoute(<Footer />)} />
+          <Route path="/profile" element={PrivateRoute(<Footer />)} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </div>
   );
 }
